@@ -6,9 +6,12 @@ import com.example.schedule_managementv2.entity.Scheduler;
 import com.example.schedule_managementv2.entity.User;
 import com.example.schedule_managementv2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +38,23 @@ public class UserService {
                 .stream()
                 .map(UserResponseDto::toDto)
                 .toList();
+    }
+
+    public UserResponseDto findById(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(optionalUser.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
+        }
+
+        User findUser = optionalUser.get();
+
+        return new UserResponseDto(
+                findUser.getId(),
+                findUser.getName(),
+                findUser.getEmail(),
+                findUser.getCreatedAt(),
+                findUser.getUpdatedAt()
+        );
     }
 }

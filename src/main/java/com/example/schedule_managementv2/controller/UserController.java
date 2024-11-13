@@ -36,4 +36,13 @@ public class UserController {
         return new ResponseEntity<>(userResponseDtoList, HttpStatus.OK);
     }
 
+    // 유저 단건 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDto> findByIdScheduler(@PathVariable Long id) {
+
+        UserResponseDto userResponseDto = userService.findById(id);
+
+        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+    }
+
 }
