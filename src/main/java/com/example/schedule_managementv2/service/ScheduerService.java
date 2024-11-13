@@ -77,4 +77,11 @@ public class ScheduerService {
                 scheduler.getCreatedAt(),
                 scheduler.getUpdatedAt());
     }
+
+    public void delete(Long id) {
+
+        Scheduler scheduler = schedulerRepository.findByIdOrElseThrow(id);
+
+        schedulerRepository.delete(scheduler);
+    }
 }

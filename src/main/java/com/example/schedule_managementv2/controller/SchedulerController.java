@@ -56,4 +56,13 @@ public class SchedulerController {
         return new ResponseEntity<>(schedulerResponseDto, HttpStatus.OK);
     }
 
+    // 일정 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteScheduler(@PathVariable Long id) {
+
+        scheduerService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
