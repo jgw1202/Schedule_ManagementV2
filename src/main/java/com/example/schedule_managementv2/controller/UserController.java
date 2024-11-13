@@ -5,10 +5,9 @@ import com.example.schedule_managementv2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,9 +16,9 @@ public class UserController {
 
     private final UserService userService;
 
-    // 일정 등록
+    // 유저 등록
     @PostMapping
-    public ResponseEntity<UserResponseDto> save(@RequestBody UserSaveRequestDto userSaveRequestDto) {
+    public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserSaveRequestDto userSaveRequestDto) {
 
         UserResponseDto userResponseDto = userService.save(
                 userSaveRequestDto.getName(),
@@ -28,6 +27,13 @@ public class UserController {
 
         return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
     }
+    // 유저 전체 조회
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>> findAllUsers() {
 
+        List<UserResponseDto> userResponseDtoList = userService.findAll();
+
+        return new ResponseEntity<>(userResponseDtoList, HttpStatus.OK);
+    }
 
 }
