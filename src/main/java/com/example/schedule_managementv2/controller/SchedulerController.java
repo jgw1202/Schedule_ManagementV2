@@ -20,6 +20,7 @@ public class SchedulerController {
     // 일정 등록
     @PostMapping
     public ResponseEntity<SchedulerResponseDto> save(@RequestBody SchedulerRequestDto schedulerRequestDto) {
+
         SchedulerResponseDto schedulerResponseDto = scheduerService.save(
                 schedulerRequestDto.getUserName(),
                 schedulerRequestDto.getTitle(),
@@ -31,6 +32,7 @@ public class SchedulerController {
     // 일정 전체 조회
     @GetMapping
     public ResponseEntity<List<SchedulerResponseDto>> findAllScheduler() {
+
         List<SchedulerResponseDto> schedulerResponseDtoList = scheduerService.findAll();
 
         return new ResponseEntity<>(schedulerResponseDtoList, HttpStatus.OK);
@@ -39,7 +41,17 @@ public class SchedulerController {
     // 일정 단건 조회
     @GetMapping("/{id}")
     public ResponseEntity<SchedulerResponseDto> findByIdScheduler(@PathVariable Long id) {
+
         SchedulerResponseDto schedulerResponseDto = scheduerService.findById(id);
+
+        return new ResponseEntity<>(schedulerResponseDto, HttpStatus.OK);
+    }
+
+    // 일정 수정
+    @PutMapping("/{id}")
+    public ResponseEntity<SchedulerResponseDto> updateScheduler(@PathVariable Long id, @RequestBody SchedulerRequestDto schedulerRequestDto) {
+
+        SchedulerResponseDto schedulerResponseDto = scheduerService.update(id, schedulerRequestDto);
 
         return new ResponseEntity<>(schedulerResponseDto, HttpStatus.OK);
     }

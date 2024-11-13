@@ -1,11 +1,13 @@
 package com.example.schedule_managementv2.service;
 
+import com.example.schedule_managementv2.dto.SchedulerRequestDto;
 import com.example.schedule_managementv2.dto.SchedulerResponseDto;
 import com.example.schedule_managementv2.entity.Scheduler;
 import com.example.schedule_managementv2.repository.SchedulerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -55,5 +57,24 @@ public class ScheduerService {
                 findScheduler.getContents(),
                 findScheduler.getCreatedAt(),
                 findScheduler.getUpdatedAt());
+    }
+
+    @Transactional
+    public SchedulerResponseDto update(Long id, SchedulerRequestDto schedulerRequestDto) {
+
+        Scheduler scheduler = schedulerRepository.findByIdOrElseThrow(id);
+
+        scheduler.update(
+                schedulerRequestDto.getUserName(),
+                schedulerRequestDto.getTitle(),
+                schedulerRequestDto.getContents()
+        );
+
+        return new SchedulerResponseDto(scheduler.getId(),
+                scheduler.getUserName(),
+                scheduler.getTitle(),
+                scheduler.getContents(),
+                scheduler.getCreatedAt(),
+                scheduler.getUpdatedAt());
     }
 }

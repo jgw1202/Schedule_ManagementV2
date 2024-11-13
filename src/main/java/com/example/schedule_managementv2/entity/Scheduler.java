@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "scheduler")
 @NoArgsConstructor
@@ -32,4 +34,9 @@ public class Scheduler extends BaseEntity {
         this.contents = contents;
     }
 
+    public void update(String userName, String title, String contents) {
+        this.userName = userName;
+        this.title = title;
+        this.contents = contents;
+    }
 }
