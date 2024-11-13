@@ -22,7 +22,6 @@ URL : /api/schedulers
 요청
 ```
 {
-
  "userId" : 1,
  "title" : "제목 1",
  "contents" : "할 일 1"

@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 public class SchedulerResponseDto {
 
     private final Long id;
-    private final String userName;
+    private final Long userId;
     private final String title;
     private final String contents;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
     public static SchedulerResponseDto toDto(Scheduler scheduler) {
-        return new SchedulerResponseDto(scheduler.getId(), scheduler.getUserName(), scheduler.getTitle(), scheduler.getContents(), scheduler.getCreatedAt(),scheduler.getUpdatedAt());
+        return new SchedulerResponseDto(scheduler.getId(), scheduler.getUser().getId(), scheduler.getTitle(), scheduler.getContents(), scheduler.getCreatedAt(),scheduler.getUpdatedAt());
     }
 
 }

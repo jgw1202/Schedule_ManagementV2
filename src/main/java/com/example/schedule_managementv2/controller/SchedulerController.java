@@ -20,14 +20,18 @@ public class SchedulerController {
     // 일정 등록
     @PostMapping
     public ResponseEntity<SchedulerResponseDto> saveScheduler(@RequestBody SchedulerRequestDto schedulerRequestDto) {
+        System.out.println("Received SchedulerRequestDto: " + schedulerRequestDto.getUserId() +
+                ", Title: " + schedulerRequestDto.getTitle() +
+                ", Contents: " + schedulerRequestDto.getContents());
 
         SchedulerResponseDto schedulerResponseDto = scheduerService.save(
-                schedulerRequestDto.getUserName(),
+                schedulerRequestDto.getUserId(),
                 schedulerRequestDto.getTitle(),
                 schedulerRequestDto.getContents());
 
         return new ResponseEntity<>(schedulerResponseDto, HttpStatus.CREATED);
     }
+
 
     // 일정 전체 조회
     @GetMapping
