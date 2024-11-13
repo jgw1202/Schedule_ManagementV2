@@ -38,11 +38,20 @@ public class UserController {
 
     // 유저 단건 조회
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDto> findByIdScheduler(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> findByIdUser(@PathVariable Long id) {
 
         UserResponseDto userResponseDto = userService.findById(id);
 
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+    }
+
+    // 유저 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+
+        userService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

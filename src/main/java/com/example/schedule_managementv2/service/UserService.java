@@ -57,4 +57,12 @@ public class UserService {
                 findUser.getUpdatedAt()
         );
     }
+
+    public void delete(Long id) {
+
+       User user =  userRepository.findByIdOrElseThrow(id);
+
+       userRepository.delete(user);
+
+    }
 }
