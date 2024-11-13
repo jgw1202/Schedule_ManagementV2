@@ -23,7 +23,7 @@ URL : /api/schedulers
 ```
 {
 
- "userName" : "작성자명1",
+ "userId" : 1,
  "title" : "제목 1",
  "contents" : "할 일 1"
 }
@@ -32,7 +32,7 @@ URL : /api/schedulers
 ```
 {
     "id": 1,
-    "userName" : "작성자명1",
+    "userId" : 1,
     "title" : "제목 1"
     "contents" : "할 일 1",
     "createdAt":"2024-11-13",
@@ -52,14 +52,14 @@ URL : /api/schedulers
 ```
 "schedulers" :[ {
     "id": 1,
-    "userName" : "작성자명1",
+    "userId" : 1,
     "title" : "제목 1"
     "contents" : "할 일 1",
     "createdAt":"2024-11-13",
     "updatedAt":"2024-11-13"
 }, {
     "id": 2,
-    "userName" : "작성자명2",
+    "userId" : 1,
     "title" : "제목 2"
     "contents" : "할 일 2",
     "createdAt":"2024-11-14",
@@ -80,7 +80,7 @@ URL : /api/schedulers/{id}
 ```
 {
     "id": 1,
-    "userName" : "작성자명1",
+    "userId" : 1,
     "title" : "제목 1"
     "contents" : "할 일 1",
     "createdAt":"2024-11-13",
@@ -94,7 +94,7 @@ URL : /api/schedulers/{id}
 요청
 ```
  {
-    "userName" : "작성자명1",
+    "userId" : 1,
     "title" : "수정된 제목 1",
     "contents" : "수정된 할 일 1",
   }
@@ -103,7 +103,7 @@ URL : /api/schedulers/{id}
 ```
 {
     "id": 1,
-    "userName" : "작성자명1",
+    "userId" : 1,
     "title" : "수정된 제목 1",
     "contents" : "수정된 할 일 1",
     "createdAt":"2024-11-13",
@@ -226,7 +226,7 @@ URL : /api/users/{id}
 
 유저는 여러 일정을 가질 수 있다. 일대다 관계
 
-![image](https://github.com/user-attachments/assets/94dc60e2-a06f-4498-b6a4-9a667e45e158)
+![image](https://github.com/user-attachments/assets/0c44f305-7bd9-4b79-951d-778c434b868d)
 
 
 ### 일정 테이블
@@ -234,7 +234,6 @@ URL : /api/users/{id}
 |-----|---------|------------|----------|-----------|------------|
 | PK  | 아이디     | id         |   | BIGINT    | N          |
 | FK  | 아이디     | user_id    |   | BIGINT    | N          |
-|  | 이름      | user_name  |  | VARCHAR(255)      | N          |
 |     | 제목      | title      |  | VARCHAR(255)      | N          |
 |     | 내용      | contents   |  | VARCHAR(255)   | N          |
 |     | 생성일자    | created_at |  | TIMESTAMP | N          |
