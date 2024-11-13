@@ -133,7 +133,6 @@ URL : /api/schedulers/{id}
 | 유저 등록 | POST   | /api/users          | 요청 body  | 등록 정보    | 201 : CREATED (정상 등록)  400 비정상 값         |
 | 유저 목록 조회 | GET    | /api/users      | 요청 param | 목록 조회 정보 | 200 : OK (정상 조회) 400 비정상 값 404 : 조회 실패           |
 | 유저 조회 | GET    | /api/users      | 요청 param | 목록 조회 정보 | 200 : OK (정상 조회) 400 비정상 값 404 : 조회 실패   |
-| 유저 수정 | PUT    | /api/users/{id} | 요청 body  | 수정 정보    | 200 : OK  (정상 수정)  400 비정상 값 404 : 수정 실패 |
 | 유저 삭제    | DELETE | /api/users/{id} | 요청 param     | -        | 200 : OK     (정상 삭제)  400 비정상 값 404 : 없는 값 삭제 시도 |
 
 - 유저 등록
@@ -193,28 +192,6 @@ URL : /api/users/{id}
 요청
 ```
 요청 : PathVarialbe 을 이용해 id 요청
-```
-응답
-```
- {
-    "id": 1,
-    "name": "Jung",
-    "email" : "email@qwer.com"
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
-}
-```
-
-- 유저 수정
-
-URL : /api/users/{id}
-
-요청
-```
-{
-    "name": "Jung",
-    "email" : "email@qwer.com"
-}
 ```
 응답
 ```

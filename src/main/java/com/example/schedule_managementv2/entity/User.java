@@ -1,9 +1,13 @@
 package com.example.schedule_managementv2.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user")
+@NoArgsConstructor
+@Getter
 public class User extends BaseEntity {
 
     @Id
@@ -19,4 +23,9 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }
