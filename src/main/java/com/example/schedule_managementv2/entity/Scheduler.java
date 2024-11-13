@@ -1,9 +1,13 @@
 package com.example.schedule_managementv2.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "scheduler")
+@NoArgsConstructor
+@Getter
 public class Scheduler extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +25,11 @@ public class Scheduler extends BaseEntity {
 
     @Column(columnDefinition = "longtext")
     private String contents;
+
+    public Scheduler(String userName, String title, String contents) {
+        this.userName = userName;
+        this.title = title;
+        this.contents = contents;
+    }
 
 }
