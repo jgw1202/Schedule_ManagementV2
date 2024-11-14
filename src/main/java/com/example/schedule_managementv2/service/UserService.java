@@ -1,5 +1,6 @@
 package com.example.schedule_managementv2.service;
 
+import com.example.schedule_managementv2.config.PasswordEncoder;
 import com.example.schedule_managementv2.dto.UserResponseDto;
 import com.example.schedule_managementv2.entity.User;
 import com.example.schedule_managementv2.repository.UserRepository;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;  // UserRepository 주입
-
+    private final PasswordEncoder passwordEncoder;
     /**
      * 새로운 사용자를 저장하는 메소드
      * @param name 사용자 이름
@@ -29,7 +30,10 @@ public class UserService {
      * @return 저장된 사용자에 대한 응답 DTO
      */
     public UserResponseDto save(String name, String email, String password) {
-        User user = new User(name, email, password);  // 새로운 사용자 객체 생성
+
+        String encodePassword = passwordEncoder.encode(password); // 비밀번호 암호화
+
+        User user = new User(name, email, encodePassword);  // 새로운 사용자 객체 생성
         User savedUser = userRepository.save(user);  // 사용자 저장
         return new UserResponseDto(
                 savedUser.getId(),
@@ -94,8 +98,8 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email");
         }
 
-        // 비밀번호가 일치하지 않을 경우 예외 처리
-        if (!user.getPassword().equals(password)) {
+        // 입력한 비밀번호와 저장된 비밀번호 비교
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password");
         }
 
