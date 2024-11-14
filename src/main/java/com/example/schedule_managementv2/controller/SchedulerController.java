@@ -3,6 +3,7 @@ package com.example.schedule_managementv2.controller;
 import com.example.schedule_managementv2.dto.SchedulerRequestDto;
 import com.example.schedule_managementv2.dto.SchedulerResponseDto;
 import com.example.schedule_managementv2.service.ScheduerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class SchedulerController {
      * @return 일정 정보가 담긴 ResponseDto
      */
     @PostMapping
-    public ResponseEntity<SchedulerResponseDto> saveScheduler(@RequestBody SchedulerRequestDto schedulerRequestDto) {
+    public ResponseEntity<SchedulerResponseDto> saveScheduler(@Valid @RequestBody SchedulerRequestDto schedulerRequestDto) {
         // 서비스 레이어를 통해 일정을 저장하고, 반환된 DTO를 클라이언트에 응답
         SchedulerResponseDto schedulerResponseDto = scheduerService.save(
                 schedulerRequestDto.getUserId(),

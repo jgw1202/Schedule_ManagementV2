@@ -1,5 +1,7 @@
 package com.example.schedule_managementv2.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +15,13 @@ import lombok.RequiredArgsConstructor;
 public class SchedulerRequestDto {
 
     private final Long userId;  // 사용자 ID, 일정이 어떤 사용자와 연결될지 나타냄
+
+    // 제목 검증 (10자 이하로 제한)
+    @NotBlank(message = "제목은 필수 입력 항목입니다.")
+    @Size(max = 10, message = "제목은 10자 이하로 입력해주세요.")
     private final String title;  // 일정 제목
+
+    // 내용 검증 (내용은 필수 입력)
+    @NotBlank(message = "내용은 필수 입력 항목입니다.")
     private final String contents;  // 일정 상세 내용
 }

@@ -2,6 +2,7 @@ package com.example.schedule_managementv2.controller;
 
 import com.example.schedule_managementv2.dto.*;
 import com.example.schedule_managementv2.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UserController {
      * @return 등록된 유저 정보가 담긴 ResponseDto
      */
     @PostMapping
-    public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserSaveRequestDto userSaveRequestDto) {
+    public ResponseEntity<UserResponseDto> saveUser(@Valid @RequestBody UserSaveRequestDto userSaveRequestDto) {
         // 서비스 레이어를 통해 유저를 저장하고, 반환된 DTO를 클라이언트에 응답
         UserResponseDto userResponseDto = userService.save(
                 userSaveRequestDto.getName(),
