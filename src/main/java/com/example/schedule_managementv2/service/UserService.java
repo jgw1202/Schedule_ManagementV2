@@ -90,8 +90,13 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password"));
 
         // 비밀번호가 일치하지 않을 경우 예외 처리
+        if (!user.getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email");
+        }
+
+        // 비밀번호가 일치하지 않을 경우 예외 처리
         if (!user.getPassword().equals(password)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password");
         }
 
         return new UserResponseDto(
