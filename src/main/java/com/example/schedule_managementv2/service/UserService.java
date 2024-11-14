@@ -1,8 +1,6 @@
 package com.example.schedule_managementv2.service;
 
-import com.example.schedule_managementv2.dto.SchedulerResponseDto;
 import com.example.schedule_managementv2.dto.UserResponseDto;
-import com.example.schedule_managementv2.entity.Scheduler;
 import com.example.schedule_managementv2.entity.User;
 import com.example.schedule_managementv2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +29,8 @@ public class UserService {
      * @return 저장된 사용자에 대한 응답 DTO
      */
     public UserResponseDto save(String name, String email, String password) {
-
-        User user = new User(name,email,password);  // 새로운 사용자 객체 생성
-
+        User user = new User(name, email, password);  // 새로운 사용자 객체 생성
         User savedUser = userRepository.save(user);  // 사용자 저장
-
         return new UserResponseDto(
                 savedUser.getId(),
                 savedUser.getName(),
@@ -62,13 +57,10 @@ public class UserService {
      */
     public UserResponseDto findById(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
-
-        if(optionalUser.isEmpty()) {  // 사용자가 없을 경우 예외 처리
+        if (optionalUser.isEmpty()) {  // 사용자가 없을 경우 예외 처리
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
         }
-
         User findUser = optionalUser.get();
-
         return new UserResponseDto(
                 findUser.getId(),
                 findUser.getName(),
@@ -83,9 +75,31 @@ public class UserService {
      * @param id 삭제할 사용자의 ID
      */
     public void delete(Long id) {
-
-        User user =  userRepository.findByIdOrElseThrow(id);  // 사용자 조회
-
+        User user = userRepository.findByIdOrElseThrow(id);  // 사용자 조회
         userRepository.delete(user);  // 사용자 삭제
+    }
+
+    /**
+     * 사용자 로그인을 처리하는 메소드
+     * @param email 사용자 이메일
+     * @param password 사용자 비밀번호
+     * @return 로그인된 사용자에 대한 응답 DTO
+     */
+    public UserResponseDto login(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password"));
+
+        // 비밀번호가 일치하지 않을 경우 예외 처리
+        if (!user.getPassword().equals(password)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+        }
+
+        return new UserResponseDto(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getCreatedAt(),
+                user.getUpdatedAt()
+        );
     }
 }

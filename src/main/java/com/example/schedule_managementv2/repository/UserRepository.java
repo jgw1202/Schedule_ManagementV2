@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 /**
  * User 엔티티에 대한 CRUD 작업을 수행하는 리포지토리 인터페이스.
  * - findByIdOrElseThrow 메소드를 추가하여, 사용자 조회 시 없는 ID일 경우 예외를 던짐
@@ -21,4 +23,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     default User findByIdOrElseThrow(Long id) {
         return findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id));
     }
+
+    /**
+     * 주어진 이메일로 User를 조회
+     * @param email 조회할 User의 이메일
+     * @return 해당 이메일에 해당하는 User (Optional)
+     */
+    Optional<User> findByEmail(String email);
 }

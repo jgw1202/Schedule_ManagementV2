@@ -34,8 +34,8 @@ URL : /api/schedulers
     "userId" : 1,
     "title" : "제목 1"
     "contents" : "할 일 1",
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
 }
 ```
 
@@ -54,15 +54,15 @@ URL : /api/schedulers
     "userId" : 1,
     "title" : "제목 1"
     "contents" : "할 일 1",
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
 }, {
     "id": 2,
     "userId" : 1,
     "title" : "제목 2"
     "contents" : "할 일 2",
-    "createdAt":"2024-11-14",
-    "updatedAt":"2024-11-14"
+    "createdAt": "2024-11-15T14:53:02.838242",
+    "updatedAt": "2024-11-15T14:53:02.838242"
     },
 ]
 ```
@@ -82,8 +82,8 @@ URL : /api/schedulers/{id}
     "userId" : 1,
     "title" : "제목 1"
     "contents" : "할 일 1",
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
 }
 ```
 - 일정 수정
@@ -105,8 +105,8 @@ URL : /api/schedulers/{id}
     "userId" : 1,
     "title" : "수정된 제목 1",
     "contents" : "수정된 할 일 1",
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-14"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-15T14:53:02.838242"
 }
 ```
 - 일정 삭제
@@ -152,8 +152,8 @@ URL : /api/users
     "id": 1,
     "name": "Jung",
     "email" : "email@qwer.com",
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
 }
 ```
 
@@ -171,14 +171,14 @@ URL : /api/users
     "id": 1,
     "name" : "Jung",
     "email" : "email@qwer.com",
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
 }, {
     "id": 2,
     "name": "Kim",
     "email" : "email@asdf.com"
-    "createdAt":"2024-11-14",
-    "updatedAt":"2024-11-14"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
     },
 ]
 ```
@@ -198,8 +198,8 @@ URL : /api/users/{id}
     "id": 1,
     "name": "Jung",
     "email" : "email@qwer.com"
-    "createdAt":"2024-11-13",
-    "updatedAt":"2024-11-13"
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
 }
 ```
 
@@ -217,7 +217,53 @@ URL : /api/users/{id}
     응답 없음
  }
 ```
+### 로그인 API
 
+* 비로그인 유저는 일정 CRUD와 유저 RD를 할 수 없다. -> 로그인 시 모든 기능 사용 가능
+
+| 기능   | Method | URL         | request  | response   | 상태코드                       |
+|------|--------|-------------|----------|------------|----------------------------|
+| 로그인  | POST   | /api/login  | 요청 body  | 로그인 사용자 정보 | 200 : OK (정상 조회)  400 비정상 값 |
+| 로그아웃 | POST    | /api/logout | 요청 body | -          | 200 : OK (정상 조회) 400 비정상 값 |
+
+- 로그인
+
+URL : /api/users/login
+
+요청
+```
+{
+    "email" : "email@qwer.com",
+    "password" : "1234"
+}
+```
+응답
+```
+{
+    "id": 1,
+    "name": "Jung",
+    "email": "email@qwer.com",
+    "createdAt": "2024-11-14T14:53:02.838242",
+    "updatedAt": "2024-11-14T14:53:02.838242"
+}
+```
+- 로그아웃
+
+URL : /api/users/logout
+
+요청
+```
+{
+    "email" : "email@qwer.com",
+    "password" : "1234"
+}
+```
+응답
+```
+ {
+    응답 없음
+ }
+```
 
 ## ERD
 
